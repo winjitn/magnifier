@@ -20,7 +20,8 @@ function getLargeImageStyle(positionX, positionY, active) {
     transform: "translate(".concat(positionX, "px, ").concat(positionY, "px)"),
     zIndex: "1",
     visibility: !active ? "hidden" : "visible",
-    width: "200%"
+    width: "200%",
+    backgroundColor: "#F6F6F6"
   };
 }
 function getZoomContainerStyle(width, height, inPlace, switchSides) {
