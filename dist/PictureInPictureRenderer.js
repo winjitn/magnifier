@@ -1,215 +1,160 @@
-import React from "react";
-import utils from "./utils";
-import styles from "./styles";
-import Image from "./Image";
-import ImagePreviewOverlay from "./ImagePreviewOverlay";
+"use strict";
 
-const PictureInPictureRenderer = props => {
-  const {
-    active,
-    itemPosition,
-    elementDimensions,
-    itemDimensions,
-    imageSrc,
-    largeImageSrc,
-    imageAlt,
-    itemRef,
-    previewSizePercentage,
-    containerRef,
-    previewVerticalPos,
-    previewOpacity,
-    previewOverlayOpacity,
-    previewOverlayBoxOpacity,
-    previewOverlayBackgroundColor,
-    previewOverlayBoxColor,
-    previewOverlayBoxImage,
-    previewOverlayBoxImageSize,
-    renderOverlay,
-    cursorStyle,
-    cursorStyleActive,
-    onLoadRefresh,
-    onImageLoad,
-    onLargeImageLoad
-  } = props;
-
-  const sizeMult = 100 / previewSizePercentage;
-
-  let containerTop = 0;
-  let containerLeft = 0;
-  let containerWidth = 0;
-
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _utils = _interopRequireDefault(require("./utils"));
+var _styles = _interopRequireDefault(require("./styles"));
+var _Image = _interopRequireDefault(require("./Image"));
+var _ImagePreviewOverlay = _interopRequireDefault(require("./ImagePreviewOverlay"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var PictureInPictureRenderer = function PictureInPictureRenderer(props) {
+  var active = props.active,
+    itemPosition = props.itemPosition,
+    elementDimensions = props.elementDimensions,
+    itemDimensions = props.itemDimensions,
+    imageSrc = props.imageSrc,
+    largeImageSrc = props.largeImageSrc,
+    imageAlt = props.imageAlt,
+    itemRef = props.itemRef,
+    previewSizePercentage = props.previewSizePercentage,
+    containerRef = props.containerRef,
+    previewVerticalPos = props.previewVerticalPos,
+    previewOpacity = props.previewOpacity,
+    previewOverlayOpacity = props.previewOverlayOpacity,
+    previewOverlayBoxOpacity = props.previewOverlayBoxOpacity,
+    previewOverlayBackgroundColor = props.previewOverlayBackgroundColor,
+    previewOverlayBoxColor = props.previewOverlayBoxColor,
+    previewOverlayBoxImage = props.previewOverlayBoxImage,
+    previewOverlayBoxImageSize = props.previewOverlayBoxImageSize,
+    renderOverlay = props.renderOverlay,
+    cursorStyle = props.cursorStyle,
+    cursorStyleActive = props.cursorStyleActive,
+    onLoadRefresh = props.onLoadRefresh,
+    _onImageLoad = props.onImageLoad,
+    onLargeImageLoad = props.onLargeImageLoad;
+  var sizeMult = 100 / previewSizePercentage;
+  var containerTop = 0;
+  var containerLeft = 0;
+  var containerWidth = 0;
   if (containerRef.current) {
     containerWidth = containerRef.current.getBoundingClientRect().width;
-
     if (previewVerticalPos === "bottom") {
       containerTop = elementDimensions.height * (sizeMult - 1);
-      containerRef.current.style.paddingTop = `${containerTop}px`;
+      containerRef.current.style.paddingTop = "".concat(containerTop, "px");
     } else {
-      containerRef.current.style.paddingBottom = `${elementDimensions.height *
-        (sizeMult - 1)}px`;
+      containerRef.current.style.paddingBottom = "".concat(elementDimensions.height * (sizeMult - 1), "px");
     }
-
     if (containerRef.current.style.textAlign === "right") {
       containerLeft = elementDimensions.width * (sizeMult - 1);
     }
   }
-
-  const smallImageSize = {
+  var smallImageSize = {
     width: elementDimensions.width,
     height: elementDimensions.height
   };
-
-  const previewSize = {
-    width: Math.floor(
-      smallImageSize.width *
-        (smallImageSize.width / itemDimensions.width) *
-        sizeMult
-    ),
-    height: Math.floor(
-      smallImageSize.height *
-        (smallImageSize.height / itemDimensions.height) *
-        sizeMult
-    )
+  var previewSize = {
+    width: Math.floor(smallImageSize.width * (smallImageSize.width / itemDimensions.width) * sizeMult),
+    height: Math.floor(smallImageSize.height * (smallImageSize.height / itemDimensions.height) * sizeMult)
   };
-
   if (isNaN(previewSize.width)) {
     previewSize.width = 0;
     previewSize.height = 0;
   }
-
-  let position = { x: 0, y: 0 };
-  const itemPositionAdj = { ...itemPosition };
-
-  const previewOffset = {
+  var position = {
+    x: 0,
+    y: 0
+  };
+  var itemPositionAdj = _objectSpread({}, itemPosition);
+  var previewOffset = {
     x: previewSize.width / 2,
     y: previewSize.height / 2
   };
-
   itemPositionAdj.x = Math.max(previewOffset.x, itemPositionAdj.x);
-  itemPositionAdj.x = Math.min(
-    smallImageSize.width - previewOffset.x,
-    itemPositionAdj.x
-  );
+  itemPositionAdj.x = Math.min(smallImageSize.width - previewOffset.x, itemPositionAdj.x);
   itemPositionAdj.y = Math.max(previewOffset.y, itemPositionAdj.y);
-  itemPositionAdj.y = Math.min(
-    smallImageSize.height - previewOffset.y,
-    itemPositionAdj.y
-  );
-
-  position = { ...itemPositionAdj };
-
-  position.x = utils.convertRange(
-    previewOffset.x,
-    smallImageSize.width - previewOffset.x,
-    itemDimensions.width * -1 + containerWidth,
-    0,
-    position.x
-  );
-  position.y = utils.convertRange(
-    previewOffset.y,
-    smallImageSize.height - previewOffset.y,
-    itemDimensions.height * -1 + smallImageSize.height * sizeMult,
-    0,
-    position.y
-  );
-
-  position.x = utils.invertNumber(
-    itemDimensions.width * -1 + containerWidth,
-    0,
-    position.x
-  );
-  position.y = utils.invertNumber(
-    itemDimensions.height * -1 + smallImageSize.height * sizeMult,
-    0,
-    position.y
-  );
-
+  itemPositionAdj.y = Math.min(smallImageSize.height - previewOffset.y, itemPositionAdj.y);
+  position = _objectSpread({}, itemPositionAdj);
+  position.x = _utils["default"].convertRange(previewOffset.x, smallImageSize.width - previewOffset.x, itemDimensions.width * -1 + containerWidth, 0, position.x);
+  position.y = _utils["default"].convertRange(previewOffset.y, smallImageSize.height - previewOffset.y, itemDimensions.height * -1 + smallImageSize.height * sizeMult, 0, position.y);
+  position.x = _utils["default"].invertNumber(itemDimensions.width * -1 + containerWidth, 0, position.x);
+  position.y = _utils["default"].invertNumber(itemDimensions.height * -1 + smallImageSize.height * sizeMult, 0, position.y);
   previewSize.left = Math.floor(itemPositionAdj.x - previewOffset.x) || 0;
   previewSize.right = Math.floor(itemPositionAdj.x + previewOffset.x) || 0;
   previewSize.top = Math.floor(itemPositionAdj.y - previewOffset.y) || 0;
   previewSize.bottom = Math.floor(itemPositionAdj.y + previewOffset.y) || 0;
-
-  const legalSize = previewSize.width < smallImageSize.width;
-  const finalCursorStyle = active ? cursorStyleActive : cursorStyle;
-
-  return (
-    <div
-      style={{
-        position: "relative",
-        cursor: legalSize ? finalCursorStyle : "default"
-      }}
-    >
-      <Image
-        style={{
-          width: "100%",
-          display: "block",
-          opacity: previewOpacity,
-          visibility: legalSize ? "visible" : "hidden"
-        }}
-        src={imageSrc}
-        alt={imageAlt}
-        onImageLoad={e => {
-          onLoadRefresh();
-          onImageLoad(e);
-        }}
-        onLoadRefresh={onLoadRefresh}
-      />
-      <div
-        style={{
-          ...styles.getZoomContainerStyle(
-            smallImageSize.width,
-            smallImageSize.height,
-            true
-          ),
-          width: containerWidth + "px",
-          height: elementDimensions.height * sizeMult + "px",
-          position: "absolute",
-          left: -containerLeft,
-          top: -containerTop,
-          fontSize: "1rem"
-        }}
-      >
-        <Image
-          style={{
-            ...styles.getLargeImageStyle(position.x, position.y, true),
-            visibility: legalSize ? "visible" : "hidden",
-            zIndex: "-1"
-          }}
-          src={largeImageSrc || imageSrc}
-          alt={imageAlt}
-          ref={itemRef}
-          onImageLoad={onLargeImageLoad}
-          onLoadRefresh={onLoadRefresh}
-        />
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          style={{
-            display: legalSize ? "none" : "block",
-            width: "100%"
-          }}
-        />
-        {renderOverlay ? renderOverlay(active) : null}
-      </div>
-      <ImagePreviewOverlay
-        previewWidth={previewSize.width}
-        previewHeight={previewSize.height}
-        previewPosLeft={previewSize.left}
-        previewPosRight={previewSize.right}
-        previewPosTop={previewSize.top}
-        previewPosBottom={previewSize.bottom}
-        imageWidth={smallImageSize.width}
-        imageHeight={smallImageSize.height}
-        overlayOpacity={previewOverlayOpacity}
-        overlayBoxOpacity={previewOverlayBoxOpacity}
-        overlayBackgroundColor={previewOverlayBackgroundColor}
-        overlayBoxColor={previewOverlayBoxColor}
-        overlayBoxImage={previewOverlayBoxImage}
-        overlayBoxImageSize={previewOverlayBoxImageSize}
-        active={legalSize}
-      />
-    </div>
-  );
+  var legalSize = previewSize.width < smallImageSize.width;
+  var finalCursorStyle = active ? cursorStyleActive : cursorStyle;
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    style: {
+      position: "relative",
+      cursor: legalSize ? finalCursorStyle : "default"
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_Image["default"], {
+    style: {
+      width: "100%",
+      display: "block",
+      opacity: previewOpacity,
+      visibility: legalSize ? "visible" : "hidden"
+    },
+    src: imageSrc,
+    alt: imageAlt,
+    onImageLoad: function onImageLoad(e) {
+      onLoadRefresh();
+      _onImageLoad(e);
+    },
+    onLoadRefresh: onLoadRefresh
+  }), /*#__PURE__*/_react["default"].createElement("div", {
+    style: _objectSpread(_objectSpread({}, _styles["default"].getZoomContainerStyle(smallImageSize.width, smallImageSize.height, true)), {}, {
+      width: containerWidth + "px",
+      height: elementDimensions.height * sizeMult + "px",
+      position: "absolute",
+      left: -containerLeft,
+      top: -containerTop,
+      fontSize: "1rem"
+    })
+  }, /*#__PURE__*/_react["default"].createElement(_Image["default"], {
+    style: _objectSpread(_objectSpread({}, _styles["default"].getLargeImageStyle(position.x, position.y, true)), {}, {
+      visibility: legalSize ? "visible" : "hidden",
+      zIndex: "-1"
+    }),
+    src: largeImageSrc || imageSrc,
+    alt: imageAlt,
+    ref: itemRef,
+    onImageLoad: onLargeImageLoad,
+    onLoadRefresh: onLoadRefresh
+  }), /*#__PURE__*/_react["default"].createElement("img", {
+    src: imageSrc,
+    alt: imageAlt,
+    style: {
+      display: legalSize ? "none" : "block",
+      width: "100%"
+    }
+  }), renderOverlay ? renderOverlay(active) : null), /*#__PURE__*/_react["default"].createElement(_ImagePreviewOverlay["default"], {
+    previewWidth: previewSize.width,
+    previewHeight: previewSize.height,
+    previewPosLeft: previewSize.left,
+    previewPosRight: previewSize.right,
+    previewPosTop: previewSize.top,
+    previewPosBottom: previewSize.bottom,
+    imageWidth: smallImageSize.width,
+    imageHeight: smallImageSize.height,
+    overlayOpacity: previewOverlayOpacity,
+    overlayBoxOpacity: previewOverlayBoxOpacity,
+    overlayBackgroundColor: previewOverlayBackgroundColor,
+    overlayBoxColor: previewOverlayBoxColor,
+    overlayBoxImage: previewOverlayBoxImage,
+    overlayBoxImageSize: previewOverlayBoxImageSize,
+    active: legalSize
+  }));
 };
-
-export default PictureInPictureRenderer;
+var _default = PictureInPictureRenderer;
+exports["default"] = _default;

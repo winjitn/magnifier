@@ -1,112 +1,101 @@
-import React from "react";
-import PropTypes from "prop-types";
-import utils from "./utils";
-import ReactInputPosition, {
-  MOUSE_ACTIVATION,
-  TOUCH_ACTIVATION,
-} from "react-input-position";
-import MagnifierPreviewRenderer from "./MagnifierPreviewRenderer";
-import { MagnifierContext } from "./MagnifierContainer";
+"use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _utils = _interopRequireDefault(require("./utils"));
+var _reactInputPosition = _interopRequireWildcard(require("react-input-position"));
+var _MagnifierPreviewRenderer = _interopRequireDefault(require("./MagnifierPreviewRenderer"));
+var _MagnifierContainer = require("./MagnifierContainer");
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 function MagnifierPreview(props) {
-  const {
-    imageSrc,
-    imageAlt,
-    largeImageSrc,
-    className,
-    style,
-    cursorStyle,
-    onImageLoad,
-    onLargeImageLoad,
-    renderOverlay,
-    overlayOpacity,
-    overlayBoxOpacity,
-    overlayBackgroundColor,
-    overlayBoxColor,
-    overlayBoxImage,
-    overlayBoxImageSize,
-    transitionSpeed,
-    onZoomStart,
-    onZoomEnd,
-    mouseActivation,
-    touchActivation,
-  } = props;
-
-  const {
-    stateOverride,
-    onUpdate,
-    zoomImageDimensions,
-    previewSize,
-    smallImageSize,
-    position,
-    inPlace,
-  } = React.useContext(MagnifierContext);
-
-  return (
-    <ReactInputPosition
-      touchActivationMethod={touchActivation}
-      mouseActivationMethod={mouseActivation}
-      onActivate={onZoomStart}
-      onDeactivate={onZoomEnd}
-      className={className}
-      style={style}
-      cursorStyle={cursorStyle}
-      trackItemPosition
-      linkItemToActive
-      stateOverride={stateOverride}
-      onUpdate={onUpdate}
-    >
-      <MagnifierPreviewRenderer
-        image={imageSrc}
-        largeImage={largeImageSrc}
-        alt={imageAlt}
-        zoomImageDimensions={zoomImageDimensions}
-        previewSize={previewSize}
-        smallImageSize={smallImageSize}
-        onImageLoad={onImageLoad}
-        onLargeImageLoad={onLargeImageLoad}
-        renderOverlay={renderOverlay}
-        overlayOpacity={overlayOpacity}
-        overlayBoxOpacity={overlayBoxOpacity}
-        overlayBackgroundColor={overlayBackgroundColor}
-        overlayBoxColor={overlayBoxColor}
-        overlayBoxImage={overlayBoxImage}
-        overlayBoxImageSize={overlayBoxImageSize}
-        transitionSpeed={transitionSpeed}
-        inPlace={inPlace}
-        position={position}
-      />
-    </ReactInputPosition>
-  );
+  var imageSrc = props.imageSrc,
+    imageAlt = props.imageAlt,
+    largeImageSrc = props.largeImageSrc,
+    className = props.className,
+    style = props.style,
+    cursorStyle = props.cursorStyle,
+    onImageLoad = props.onImageLoad,
+    onLargeImageLoad = props.onLargeImageLoad,
+    renderOverlay = props.renderOverlay,
+    overlayOpacity = props.overlayOpacity,
+    overlayBoxOpacity = props.overlayBoxOpacity,
+    overlayBackgroundColor = props.overlayBackgroundColor,
+    overlayBoxColor = props.overlayBoxColor,
+    overlayBoxImage = props.overlayBoxImage,
+    overlayBoxImageSize = props.overlayBoxImageSize,
+    transitionSpeed = props.transitionSpeed,
+    onZoomStart = props.onZoomStart,
+    onZoomEnd = props.onZoomEnd,
+    mouseActivation = props.mouseActivation,
+    touchActivation = props.touchActivation;
+  var _React$useContext = _react["default"].useContext(_MagnifierContainer.MagnifierContext),
+    stateOverride = _React$useContext.stateOverride,
+    onUpdate = _React$useContext.onUpdate,
+    zoomImageDimensions = _React$useContext.zoomImageDimensions,
+    previewSize = _React$useContext.previewSize,
+    smallImageSize = _React$useContext.smallImageSize,
+    position = _React$useContext.position,
+    inPlace = _React$useContext.inPlace;
+  return /*#__PURE__*/_react["default"].createElement(_reactInputPosition["default"], {
+    touchActivationMethod: touchActivation,
+    mouseActivationMethod: mouseActivation,
+    onActivate: onZoomStart,
+    onDeactivate: onZoomEnd,
+    className: className,
+    style: style,
+    cursorStyle: cursorStyle,
+    trackItemPosition: true,
+    linkItemToActive: true,
+    stateOverride: stateOverride,
+    onUpdate: onUpdate
+  }, /*#__PURE__*/_react["default"].createElement(_MagnifierPreviewRenderer["default"], {
+    image: imageSrc,
+    largeImage: largeImageSrc,
+    alt: imageAlt,
+    zoomImageDimensions: zoomImageDimensions,
+    previewSize: previewSize,
+    smallImageSize: smallImageSize,
+    onImageLoad: onImageLoad,
+    onLargeImageLoad: onLargeImageLoad,
+    renderOverlay: renderOverlay,
+    overlayOpacity: overlayOpacity,
+    overlayBoxOpacity: overlayBoxOpacity,
+    overlayBackgroundColor: overlayBackgroundColor,
+    overlayBoxColor: overlayBoxColor,
+    overlayBoxImage: overlayBoxImage,
+    overlayBoxImageSize: overlayBoxImageSize,
+    transitionSpeed: transitionSpeed,
+    inPlace: inPlace,
+    position: position
+  }));
 }
-
 MagnifierPreview.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-  cursorStyle: PropTypes.string,
-  imageSrc: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
-  largeImageSrc: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
-  imageAlt: PropTypes.string,
-  onImageLoad: PropTypes.func,
-  onLargeImageLoad: PropTypes.func,
-  renderOverlay: PropTypes.func,
-  overlayBoxOpacity: PropTypes.number,
-  overlayOpacity: PropTypes.number,
-  overlayBackgroundColor: PropTypes.string,
-  overlayBoxColor: PropTypes.string,
-  overlayBoxImage: PropTypes.string,
-  overlayBoxImageSize: PropTypes.string,
-  transitionSpeed: PropTypes.number,
-  mouseActivation: PropTypes.string,
-  touchActivation: PropTypes.string,
+  className: _propTypes["default"].string,
+  style: _propTypes["default"].object,
+  cursorStyle: _propTypes["default"].string,
+  imageSrc: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].arrayOf(_propTypes["default"].string)]),
+  largeImageSrc: _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].arrayOf(_propTypes["default"].string)]),
+  imageAlt: _propTypes["default"].string,
+  onImageLoad: _propTypes["default"].func,
+  onLargeImageLoad: _propTypes["default"].func,
+  renderOverlay: _propTypes["default"].func,
+  overlayBoxOpacity: _propTypes["default"].number,
+  overlayOpacity: _propTypes["default"].number,
+  overlayBackgroundColor: _propTypes["default"].string,
+  overlayBoxColor: _propTypes["default"].string,
+  overlayBoxImage: _propTypes["default"].string,
+  overlayBoxImageSize: _propTypes["default"].string,
+  transitionSpeed: _propTypes["default"].number,
+  mouseActivation: _propTypes["default"].string,
+  touchActivation: _propTypes["default"].string
 };
-
 MagnifierPreview.defaultProps = {
   cursorStyle: "unset",
   imageSrc: "",
@@ -118,10 +107,10 @@ MagnifierPreview.defaultProps = {
   overlayBoxImage: "",
   overlayBoxImageSize: "",
   transitionSpeed: 0.4,
-  onImageLoad: utils.noop,
-  onLargeImageLoad: utils.noop,
-  mouseActivation: MOUSE_ACTIVATION.HOVER,
-  touchActivation: TOUCH_ACTIVATION.TOUCH,
+  onImageLoad: _utils["default"].noop,
+  onLargeImageLoad: _utils["default"].noop,
+  mouseActivation: _reactInputPosition.MOUSE_ACTIVATION.HOVER,
+  touchActivation: _reactInputPosition.TOUCH_ACTIVATION.TOUCH
 };
-
-export default MagnifierPreview;
+var _default = MagnifierPreview;
+exports["default"] = _default;

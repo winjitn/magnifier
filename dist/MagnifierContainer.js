@@ -1,197 +1,204 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { defaultState } from "react-input-position";
-import utils from "./utils";
+"use strict";
 
-export const MagnifierContext = React.createContext();
-
-class MagnifierContainer extends Component {
-  state = {
-    inputPositionState: defaultState
-  };
-  zoomContainerRef = React.createRef();
-  zoomImageRef = React.createRef();
-  zoomImageDimensions = { width: 0, height: 0 };
-
-  static propTypes = {
-    className: PropTypes.string,
-    style: PropTypes.object,
-    autoInPlace: PropTypes.bool,
-    inPlaceMinBreakpoint: PropTypes.number
-  };
-
-  static defaultProps = {
-    inPlaceMinBreakpoint: 0
-  };
-
-  getZoomContainerDimensions = () => {
-    if (!this.zoomContainerRef.current) {
-      return { width: 0, height: 0, left: 0, right: 0, top: 0, bottom: 0 };
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.MagnifierContext = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _reactInputPosition = require("react-input-position");
+var _utils = _interopRequireDefault(require("./utils"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var MagnifierContext = /*#__PURE__*/_react["default"].createContext();
+exports.MagnifierContext = MagnifierContext;
+var MagnifierContainer = /*#__PURE__*/function (_Component) {
+  _inherits(MagnifierContainer, _Component);
+  var _super = _createSuper(MagnifierContainer);
+  function MagnifierContainer() {
+    var _this;
+    _classCallCheck(this, MagnifierContainer);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
     }
-
-    const {
-      width,
-      height,
-      left,
-      right,
-      top,
-      bottom
-    } = this.zoomContainerRef.current.getBoundingClientRect();
-
-    return { width, height, left, right, top, bottom };
-  };
-
-  getZoomImageDimensions() {
-    if (!this.zoomImageDimensions.width && this.zoomImageRef.current) {
-      const rect = this.zoomImageRef.current.getBoundingClientRect();
-      this.zoomImageDimensions = {
+    _this = _super.call.apply(_super, [this].concat(args));
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      inputPositionState: _reactInputPosition.defaultState
+    });
+    _defineProperty(_assertThisInitialized(_this), "zoomContainerRef", /*#__PURE__*/_react["default"].createRef());
+    _defineProperty(_assertThisInitialized(_this), "zoomImageRef", /*#__PURE__*/_react["default"].createRef());
+    _defineProperty(_assertThisInitialized(_this), "zoomImageDimensions", {
+      width: 0,
+      height: 0
+    });
+    _defineProperty(_assertThisInitialized(_this), "getZoomContainerDimensions", function () {
+      if (!_this.zoomContainerRef.current) {
+        return {
+          width: 0,
+          height: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0
+        };
+      }
+      var _this$zoomContainerRe = _this.zoomContainerRef.current.getBoundingClientRect(),
+        width = _this$zoomContainerRe.width,
+        height = _this$zoomContainerRe.height,
+        left = _this$zoomContainerRe.left,
+        right = _this$zoomContainerRe.right,
+        top = _this$zoomContainerRe.top,
+        bottom = _this$zoomContainerRe.bottom;
+      return {
+        width: width,
+        height: height,
+        left: left,
+        right: right,
+        top: top,
+        bottom: bottom
+      };
+    });
+    _defineProperty(_assertThisInitialized(_this), "onUpdate", function (changes) {
+      _this.setState({
+        inputPositionState: changes
+      });
+    });
+    _defineProperty(_assertThisInitialized(_this), "onZoomImageLoad", function (e) {
+      var rect = e.target.getBoundingClientRect();
+      _this.zoomImageDimensions = {
         width: rect.width,
         height: rect.height
       };
+    });
+    return _this;
+  }
+  _createClass(MagnifierContainer, [{
+    key: "getZoomImageDimensions",
+    value: function getZoomImageDimensions() {
+      if (!this.zoomImageDimensions.width && this.zoomImageRef.current) {
+        var rect = this.zoomImageRef.current.getBoundingClientRect();
+        this.zoomImageDimensions = {
+          width: rect.width,
+          height: rect.height
+        };
+      }
+      return this.zoomImageDimensions;
     }
-    return this.zoomImageDimensions;
-  }
-
-  onUpdate = changes => {
-    this.setState({ inputPositionState: changes });
-  };
-
-  onZoomImageLoad = e => {
-    const rect = e.target.getBoundingClientRect();
-    this.zoomImageDimensions = {
-      width: rect.width,
-      height: rect.height
-    };
-  };
-
-  getContextValue() {
-    return {
-      stateOverride: this.state.inputPositionState,
-      isActive: this.state.inputPositionState.active,
-      onUpdate: this.onUpdate,
-      zoomImageDimensions: this.zoomImageDimensions,
-      zoomRef: this.zoomContainerRef,
-      zoomImageRef: this.zoomImageRef,
-      onZoomImageLoad: this.onZoomImageLoad,
-      ...this.calculatePositions()
-    };
-  }
-
-  calculatePositions() {
-    const { elementDimensions, itemPosition } = this.state.inputPositionState;
-    const zoomContainerDimensions = this.getZoomContainerDimensions();
-    const zoomImageDimensions = this.getZoomImageDimensions();
-
-    let inPlace = false;
-    const { autoInPlace, inPlaceMinBreakpoint } = this.props;
-
-    if (autoInPlace || inPlaceMinBreakpoint) {
-      try {
-        const { left, right } = zoomContainerDimensions;
-        const windowWidth = window.innerWidth;
-
-        if (
-          windowWidth < inPlaceMinBreakpoint ||
-          left < 0 ||
-          right > windowWidth
-        ) {
-          inPlace = true;
-        }
-      } catch (e) {}
+  }, {
+    key: "getContextValue",
+    value: function getContextValue() {
+      return _objectSpread({
+        stateOverride: this.state.inputPositionState,
+        isActive: this.state.inputPositionState.active,
+        onUpdate: this.onUpdate,
+        zoomImageDimensions: this.zoomImageDimensions,
+        zoomRef: this.zoomContainerRef,
+        zoomImageRef: this.zoomImageRef,
+        onZoomImageLoad: this.onZoomImageLoad
+      }, this.calculatePositions());
     }
-
-    const smallImageSize = {
-      width: elementDimensions.width,
-      height: elementDimensions.height
-    };
-
-    const previewSize = {
-      width: Math.floor(
-        smallImageSize.width *
-          (zoomContainerDimensions.width / zoomImageDimensions.width)
-      ),
-      height: Math.floor(
-        smallImageSize.height *
-          (zoomContainerDimensions.height / zoomImageDimensions.height)
-      )
-    };
-
-    let position = { x: 0, y: 0 };
-    const itemPositionAdj = { ...itemPosition };
-
-    const previewOffset = {
-      x: inPlace ? 0 : previewSize.width / 2,
-      y: inPlace ? 0 : previewSize.height / 2
-    };
-
-    itemPositionAdj.x = Math.max(previewOffset.x, itemPositionAdj.x);
-    itemPositionAdj.x = Math.min(
-      smallImageSize.width - previewOffset.x,
-      itemPositionAdj.x
-    );
-    itemPositionAdj.y = Math.max(previewOffset.y, itemPositionAdj.y);
-    itemPositionAdj.y = Math.min(
-      smallImageSize.height - previewOffset.y,
-      itemPositionAdj.y
-    );
-
-    position = { ...itemPositionAdj };
-
-    const zoomContainerSize = inPlace
-      ? smallImageSize
-      : zoomContainerDimensions;
-
-    position.x = utils.convertRange(
-      previewOffset.x,
-      smallImageSize.width - previewOffset.x,
-      zoomImageDimensions.width * -1 + zoomContainerSize.width,
-      0,
-      position.x
-    );
-    position.y = utils.convertRange(
-      previewOffset.y,
-      smallImageSize.height - previewOffset.y,
-      zoomImageDimensions.height * -1 + zoomContainerSize.height,
-      0,
-      position.y
-    );
-
-    position.x = utils.invertNumber(
-      zoomImageDimensions.width * -1 + zoomContainerSize.width,
-      0,
-      position.x
-    );
-    position.y = utils.invertNumber(
-      zoomImageDimensions.height * -1 + zoomContainerSize.height,
-      0,
-      position.y
-    );
-
-    previewSize.left = Math.floor(itemPositionAdj.x - previewOffset.x) || 0;
-    previewSize.right = Math.floor(itemPositionAdj.x + previewOffset.x) || 0;
-    previewSize.top = Math.floor(itemPositionAdj.y - previewOffset.y) || 0;
-    previewSize.bottom = Math.floor(itemPositionAdj.y + previewOffset.y) || 0;
-
-    return {
-      position,
-      smallImageSize,
-      previewSize,
-      zoomContainerDimensions,
-      inPlace
-    };
-  }
-
-  render() {
-    const { style, className } = this.props;
-
-    return (
-      <div style={style} className={className}>
-        <MagnifierContext.Provider value={this.getContextValue()}>
-          {this.props.children}
-        </MagnifierContext.Provider>
-      </div>
-    );
-  }
-}
-
-export default MagnifierContainer;
+  }, {
+    key: "calculatePositions",
+    value: function calculatePositions() {
+      var _this$state$inputPosi = this.state.inputPositionState,
+        elementDimensions = _this$state$inputPosi.elementDimensions,
+        itemPosition = _this$state$inputPosi.itemPosition;
+      var zoomContainerDimensions = this.getZoomContainerDimensions();
+      var zoomImageDimensions = this.getZoomImageDimensions();
+      var inPlace = false;
+      var _this$props = this.props,
+        autoInPlace = _this$props.autoInPlace,
+        inPlaceMinBreakpoint = _this$props.inPlaceMinBreakpoint;
+      if (autoInPlace || inPlaceMinBreakpoint) {
+        try {
+          var left = zoomContainerDimensions.left,
+            right = zoomContainerDimensions.right;
+          var windowWidth = window.innerWidth;
+          if (windowWidth < inPlaceMinBreakpoint || left < 0 || right > windowWidth) {
+            inPlace = true;
+          }
+        } catch (e) {}
+      }
+      var smallImageSize = {
+        width: elementDimensions.width,
+        height: elementDimensions.height
+      };
+      var previewSize = {
+        width: Math.floor(smallImageSize.width * (zoomContainerDimensions.width / zoomImageDimensions.width)),
+        height: Math.floor(smallImageSize.height * (zoomContainerDimensions.height / zoomImageDimensions.height))
+      };
+      var position = {
+        x: 0,
+        y: 0
+      };
+      var itemPositionAdj = _objectSpread({}, itemPosition);
+      var previewOffset = {
+        x: inPlace ? 0 : previewSize.width / 2,
+        y: inPlace ? 0 : previewSize.height / 2
+      };
+      itemPositionAdj.x = Math.max(previewOffset.x, itemPositionAdj.x);
+      itemPositionAdj.x = Math.min(smallImageSize.width - previewOffset.x, itemPositionAdj.x);
+      itemPositionAdj.y = Math.max(previewOffset.y, itemPositionAdj.y);
+      itemPositionAdj.y = Math.min(smallImageSize.height - previewOffset.y, itemPositionAdj.y);
+      position = _objectSpread({}, itemPositionAdj);
+      var zoomContainerSize = inPlace ? smallImageSize : zoomContainerDimensions;
+      position.x = _utils["default"].convertRange(previewOffset.x, smallImageSize.width - previewOffset.x, zoomImageDimensions.width * -1 + zoomContainerSize.width, 0, position.x);
+      position.y = _utils["default"].convertRange(previewOffset.y, smallImageSize.height - previewOffset.y, zoomImageDimensions.height * -1 + zoomContainerSize.height, 0, position.y);
+      position.x = _utils["default"].invertNumber(zoomImageDimensions.width * -1 + zoomContainerSize.width, 0, position.x);
+      position.y = _utils["default"].invertNumber(zoomImageDimensions.height * -1 + zoomContainerSize.height, 0, position.y);
+      previewSize.left = Math.floor(itemPositionAdj.x - previewOffset.x) || 0;
+      previewSize.right = Math.floor(itemPositionAdj.x + previewOffset.x) || 0;
+      previewSize.top = Math.floor(itemPositionAdj.y - previewOffset.y) || 0;
+      previewSize.bottom = Math.floor(itemPositionAdj.y + previewOffset.y) || 0;
+      return {
+        position: position,
+        smallImageSize: smallImageSize,
+        previewSize: previewSize,
+        zoomContainerDimensions: zoomContainerDimensions,
+        inPlace: inPlace
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props2 = this.props,
+        style = _this$props2.style,
+        className = _this$props2.className;
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        style: style,
+        className: className
+      }, /*#__PURE__*/_react["default"].createElement(MagnifierContext.Provider, {
+        value: this.getContextValue()
+      }, this.props.children));
+    }
+  }]);
+  return MagnifierContainer;
+}(_react.Component);
+_defineProperty(MagnifierContainer, "propTypes", {
+  className: _propTypes["default"].string,
+  style: _propTypes["default"].object,
+  autoInPlace: _propTypes["default"].bool,
+  inPlaceMinBreakpoint: _propTypes["default"].number
+});
+_defineProperty(MagnifierContainer, "defaultProps", {
+  inPlaceMinBreakpoint: 0
+});
+var _default = MagnifierContainer;
+exports["default"] = _default;
