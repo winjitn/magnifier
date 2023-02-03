@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import utils from "./utils";
 import ReactInputPosition, {
   MOUSE_ACTIVATION,
-  TOUCH_ACTIVATION
+  TOUCH_ACTIVATION,
 } from "react-input-position";
 import MagnifierPreviewRenderer from "./MagnifierPreviewRenderer";
 import { MagnifierContext } from "./MagnifierContainer";
@@ -29,7 +29,7 @@ function MagnifierPreview(props) {
     onZoomStart,
     onZoomEnd,
     mouseActivation,
-    touchActivation
+    touchActivation,
   } = props;
 
   const {
@@ -39,7 +39,7 @@ function MagnifierPreview(props) {
     previewSize,
     smallImageSize,
     position,
-    inPlace
+    inPlace,
   } = React.useContext(MagnifierContext);
 
   return (
@@ -86,11 +86,11 @@ MagnifierPreview.propTypes = {
   cursorStyle: PropTypes.string,
   imageSrc: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   largeImageSrc: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   imageAlt: PropTypes.string,
   onImageLoad: PropTypes.func,
@@ -104,11 +104,11 @@ MagnifierPreview.propTypes = {
   overlayBoxImageSize: PropTypes.string,
   transitionSpeed: PropTypes.number,
   mouseActivation: PropTypes.string,
-  touchActivation: PropTypes.string
+  touchActivation: PropTypes.string,
 };
 
 MagnifierPreview.defaultProps = {
-  cursorStyle: "crosshair",
+  cursorStyle: "unset",
   imageSrc: "",
   imageAlt: "",
   overlayOpacity: 0.5,
@@ -121,7 +121,7 @@ MagnifierPreview.defaultProps = {
   onImageLoad: utils.noop,
   onLargeImageLoad: utils.noop,
   mouseActivation: MOUSE_ACTIVATION.HOVER,
-  touchActivation: TOUCH_ACTIVATION.TOUCH
+  touchActivation: TOUCH_ACTIVATION.TOUCH,
 };
 
 export default MagnifierPreview;

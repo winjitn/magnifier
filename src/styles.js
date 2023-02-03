@@ -8,7 +8,7 @@ function getLargeImageStyle(positionX, positionY, active) {
     transform: `translate(${positionX}px, ${positionY}px)`,
     zIndex: "1",
     visibility: !active ? "hidden" : "visible",
-    width: "auto"
+    width: "200%",
   };
 }
 
@@ -20,7 +20,7 @@ function getZoomContainerStyle(width, height, inPlace, switchSides) {
     width: `${width}px`,
     height: `${height}px`,
     top: "0",
-    overflow: "hidden"
+    overflow: "hidden",
   };
 
   if (inPlace) {
@@ -68,7 +68,7 @@ function getOverlayCenterStyle(
     transition: `opacity ${transitionSpeed}s ease`,
     zIndex: "15",
     pointerEvents: "none",
-    ...backgroundStyle
+    ...backgroundStyle,
   };
 }
 
@@ -91,7 +91,7 @@ function getOverlayTopStyle(
     transition: `opacity ${transitionSpeed}s ease`,
     opacity: opacity,
     transform: "scale3d(1,1,1)",
-    pointerEvents: "none"
+    pointerEvents: "none",
   };
 }
 
@@ -115,7 +115,7 @@ function getOverlayLeftStyle(
     transition: `opacity ${transitionSpeed}s ease`,
     opacity: opacity,
     transform: "scale3d(1,1,1)",
-    pointerEvents: "none"
+    pointerEvents: "none",
   };
 }
 
@@ -139,7 +139,7 @@ function getOverlayRightStyle(
     transition: `opacity ${transitionSpeed}s ease`,
     opacity: opacity,
     transform: "scale3d(1,1,1)",
-    pointerEvents: "none"
+    pointerEvents: "none",
   };
 }
 
@@ -162,7 +162,7 @@ function getOverlayBottomStyle(
     transition: `opacity ${transitionSpeed}s ease`,
     opacity: opacity,
     transform: "scale3d(1,1,1)",
-    pointerEvents: "none"
+    pointerEvents: "none",
   };
 }
 
@@ -170,7 +170,7 @@ function getMagnifierZoomStyle(active, transitionSpeed) {
   return {
     position: "relative",
     opacity: active ? 1 : 0,
-    transition: `opacity ${transitionSpeed}s ease`
+    transition: `opacity ${transitionSpeed}s ease`,
   };
 }
 
@@ -182,5 +182,5 @@ export default {
   getOverlayLeftStyle,
   getOverlayRightStyle,
   getOverlayBottomStyle,
-  getMagnifierZoomStyle
+  getMagnifierZoomStyle,
 };

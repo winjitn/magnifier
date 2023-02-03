@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import utils from "./utils";
 import ReactInputPosition, {
   TOUCH_ACTIVATION,
-  MOUSE_ACTIVATION
+  MOUSE_ACTIVATION,
 } from "react-input-position";
 import PictureInPictureRenderer from "./PictureInPictureRenderer";
 
@@ -13,11 +13,11 @@ class PictureInPictureMagnifier extends Component {
   static propTypes = {
     imageSrc: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string)
+      PropTypes.arrayOf(PropTypes.string),
     ]),
     largeImageSrc: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string)
+      PropTypes.arrayOf(PropTypes.string),
     ]),
     imageAlt: PropTypes.string,
     previewSizePercentage: PropTypes.number,
@@ -40,7 +40,7 @@ class PictureInPictureMagnifier extends Component {
     onImageLoad: PropTypes.func,
     onLargeImageLoad: PropTypes.func,
     onZoomStart: PropTypes.func,
-    onZoomEnd: PropTypes.func
+    onZoomEnd: PropTypes.func,
   };
 
   static defaultProps = {
@@ -57,11 +57,11 @@ class PictureInPictureMagnifier extends Component {
     previewOverlayBoxColor: "#fff",
     previewOverlayBoxImage: "",
     previewOverlayBoxImageSize: "",
-    cursorStyle: "crosshair",
+    cursorStyle: "unset",
     cursorStyleActive: "",
     shadowColor: "rgba(0,0,0,.4)",
     onImageLoad: utils.noop,
-    onLargeImageLoad: utils.noop
+    onLargeImageLoad: utils.noop,
   };
 
   render() {
@@ -89,7 +89,7 @@ class PictureInPictureMagnifier extends Component {
       onImageLoad,
       onLargeImageLoad,
       onZoomStart,
-      onZoomEnd
+      onZoomEnd,
     } = this.props;
 
     return (
@@ -99,7 +99,7 @@ class PictureInPictureMagnifier extends Component {
           ...style,
           textAlign: previewHorizontalPos,
           overflow: "hidden",
-          fontSize: "0"
+          fontSize: "0",
         }}
         className={className}
       >
@@ -107,7 +107,7 @@ class PictureInPictureMagnifier extends Component {
           style={{
             width: `${previewSizePercentage}%`,
             display: "inline-block",
-            boxShadow: shadow ? `1px -1px 1px ${shadowColor}` : "none"
+            boxShadow: shadow ? `1px -1px 1px ${shadowColor}` : "none",
           }}
           touchActivationMethod={TOUCH_ACTIVATION.TOUCH}
           mouseActivationMethod={MOUSE_ACTIVATION.MOUSE_DOWN}

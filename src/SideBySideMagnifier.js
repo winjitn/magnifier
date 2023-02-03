@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import utils from "./utils";
 import ReactInputPosition, {
   TOUCH_ACTIVATION,
-  MOUSE_ACTIVATION
+  MOUSE_ACTIVATION,
 } from "react-input-position";
 import SideBySideRenderer from "./SideBySideRenderer";
 
-const SideBySideMagnifier = props => {
+const SideBySideMagnifier = (props) => {
   const {
     imageSrc,
     largeImageSrc,
@@ -40,7 +40,7 @@ const SideBySideMagnifier = props => {
     zoomContainerBorder,
     zoomContainerBoxShadow,
     mouseActivation,
-    touchActivation
+    touchActivation,
   } = props;
 
   return (
@@ -89,11 +89,11 @@ const SideBySideMagnifier = props => {
 SideBySideMagnifier.propTypes = {
   imageSrc: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   largeImageSrc: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]),
   imageAlt: PropTypes.string,
   overlayOpacity: PropTypes.number,
@@ -121,7 +121,7 @@ SideBySideMagnifier.propTypes = {
   zoomContainerBorder: PropTypes.string,
   zoomContainerBoxShadow: PropTypes.string,
   mouseActivation: PropTypes.string,
-  touchActivation: PropTypes.string
+  touchActivation: PropTypes.string,
 };
 
 SideBySideMagnifier.defaultProps = {
@@ -134,7 +134,7 @@ SideBySideMagnifier.defaultProps = {
   overlayBoxColor: "#fff",
   overlayBoxImage: "",
   overlayBoxImageSize: "",
-  cursorStyle: "crosshair",
+  cursorStyle: "unset",
   transitionSpeed: 0.4,
   transitionSpeedInPlace: 0.4,
   onImageLoad: utils.noop,
@@ -149,7 +149,7 @@ SideBySideMagnifier.defaultProps = {
   zoomContainerBorder: "none",
   zoomContainerBoxShadow: "none",
   mouseActivation: MOUSE_ACTIVATION.HOVER,
-  touchActivation: TOUCH_ACTIVATION.TOUCH
+  touchActivation: TOUCH_ACTIVATION.TOUCH,
 };
 
 export default SideBySideMagnifier;
