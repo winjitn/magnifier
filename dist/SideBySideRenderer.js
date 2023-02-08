@@ -143,7 +143,6 @@ var SideBySideRenderer = function SideBySideRenderer(props) {
     style: {
       width: "100%",
       display: "block",
-      cursor: legalSize ? cursorStyle : "default"
     },
     src: imageSrc,
     alt: imageAlt,
